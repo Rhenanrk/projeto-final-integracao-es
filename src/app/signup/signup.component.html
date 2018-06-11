@@ -1,0 +1,55 @@
+<div class="login-page" [@routerTransition]>
+    <div class="row justify-content-md-center">
+        <div class="col-md-4">
+            <img class="user-avatar" src="assets/images/logo.png" width="150px" />
+            <h1>PW Sistemas</h1>
+            <form #userForm="ngForm" (ngSubmit)="onSubmit(f)" role="form">
+                <div [hidden]="!error" class="alert alert-danger">
+                    Algum erro aconteceu ao criar sua conta, por favor, tente novamente mais tarde
+                </div>
+                <div class="form-content">
+                    <div class="form-group">
+                        <input type="text" name="name" #name="ngModel" [(ngModel)]="model.name" class="form-control input-underline input-lg" placeholder="Nome completo" required>
+                        <div [hidden]="name.valid || name.pristine"
+                                class="alert alert-danger">
+                            Nome é obrigatório
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" #email="ngModel" name="email" [(ngModel)]="model.email" class="form-control input-underline input-lg" placeholder="E-mail" required>
+                        <div [hidden]="email.valid || email.pristine"
+                                class="alert alert-danger">
+                            E-mail é obrigatório
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="text" #document="ngModel" name="document" [(ngModel)]="model.document" class="form-control input-underline input-lg" placeholder="CPF" required>
+                        <div [hidden]="document.valid || document.pristine"
+                                class="alert alert-danger">
+                            Documento é obrigatório
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="password" #password="ngModel" name="password" [(ngModel)]="model.password" class="form-control input-underline input-lg" placeholder="Senha" required>
+                        <div [hidden]="password.valid || password.pristine"
+                                class="alert alert-danger">
+                            A senha é obrigatória
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="repeatPassword" [(ngModel)]="repeatPassword" class="form-control input-underline input-lg" placeholder="Repita a senha" required>
+                        <div [hidden]="!invalid"
+                                class="alert alert-danger">
+                            As senhas não conferem
+                        </div>
+                    </div>
+                </div>
+                <button [disabled]="!userForm.form.valid" class="btn rounded-btn"> Registrar </button>&nbsp;
+                <a class="btn rounded-btn" [routerLink]="['/login']"> Entrar </a>
+            </form>
+        </div>
+    </div>
+</div>
