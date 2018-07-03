@@ -3,11 +3,11 @@ var AWS = require('aws-sdk');
 // Configura a região 
 AWS.config.update({region: 'sa-east-1'});
 
-var accessKeyId = localStorage('accessKeyId');
+var accessKeyId = localStorage.getItem('accessKeyId')
 
-var secretAccessKey = localStorage('secretAccessKey');
+var secretAccessKey = localStorage.getItem('secretAccessKey');
 
-var queueURL = localStorage('queueURL');
+var queueURL = localStorage.getItem('queueURL');
 
 // Criar um objeto do tipo SQS service
 this.sqs = new AWS.SQS({apiVersion: '2012-11-05', region: 'sa-east-1', accessKeyId: accessKeyId, secretAccessKey: secretAccessKey})
