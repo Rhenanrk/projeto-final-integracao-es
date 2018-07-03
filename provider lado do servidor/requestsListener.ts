@@ -1,12 +1,18 @@
-// Load the AWS SDK for Node.js
+// carrega o AWS SDK do Node.js
 var AWS = require('aws-sdk');
-// Set the region 
+// Configura a região 
 AWS.config.update({region: 'sa-east-1'});
 
-// Create an SQS service object
-this.sqs = new AWS.SQS({apiVersion: '2012-11-05', region: 'sa-east-1', accessKeyId: 'AKIAIOLVP62M3UVDJMCQ', secretAccessKey: '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'})
+var accessKeyId = localStorage('accessKeyId');
 
-var queueURL = "https://sqs.sa-east-1.amazonaws.com/672804215101/Fila";
+var secretAccessKey = localStorage('secretAccessKey');
+
+var queueURL = localStorage('queueURL');
+
+// Criar um objeto do tipo SQS service
+this.sqs = new AWS.SQS({apiVersion: '2012-11-05', region: 'sa-east-1', accessKeyId: accessKeyId, secretAccessKey: secretAccessKey})
+
+var queueURL = queueURL;
 
 var params = {
  AttributeNames: [
@@ -21,6 +27,10 @@ var params = {
  WaitTimeSeconds: 0
 };
 
+/**
+ * Método responsável por receber as requisições que estão aguardando na lista do SQS
+ * @returns {Void}
+ */
 sqs.receiveMessage(params, function(err, data) {
   if (err) {
     console.log("Receive Error", err);
