@@ -12,9 +12,9 @@ export class RequestsProvider {
 
   constructor(public api: ApiProvider, public user: UserProvider) {
     // AWS.config.update('sa-east-1')
-    var accessKeyId = localStorage('accessKeyId');
+    var accessKeyId = localStorage.getItem('accessKeyId');
 
-    var secretAccessKey = localStorage('secretAccessKey');    
+    var secretAccessKey = localStorage.getItem('secretAccessKey');    
     
     this.sqs = new AWS.SQS({apiVersion: '2012-11-05', region: 'sa-east-1', accessKeyId: accessKeyId, secretAccessKey: secretAccessKey})
     
