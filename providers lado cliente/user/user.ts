@@ -2,6 +2,10 @@ import { Injectable } from '@angular/core';
 import { ApiProvider } from '../api/api';
 import { User } from '../../models/user';
 
+/**
+ * Classe responsável por definir os atributos do objeto UserProvider
+ * @returns {Void}
+ */
 @Injectable()
 export class UserProvider {
 
