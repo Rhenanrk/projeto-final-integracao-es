@@ -12,14 +12,27 @@ export class RequestsProvider {
 
   constructor(public api: ApiProvider, public user: UserProvider) {
     // AWS.config.update('sa-east-1')
-    this.sqs = new AWS.SQS({apiVersion: '2012-11-05', region: 'sa-east-1', accessKeyId: 'AKIAIOLVP62M3UVDJMCQ', secretAccessKey: '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'})
+    var accessKeyId = localStorage('accessKeyId');
+
+    var secretAccessKey = localStorage('secretAccessKey');    
+    
+    this.sqs = new AWS.SQS({apiVersion: '2012-11-05', region: 'sa-east-1', accessKeyId: accessKeyId, secretAccessKey: secretAccessKey})
     
   }
-
+  
+  /**
+ * Método responsável por retornar as requisições de serviçoes de assistência feitas pelo usuário
+ * @returns {List}
+ */
   public getRequests() {
     return this.api.get('requests/', this.user._token);
   }
 
+  
+  /**
+ * Método responsável por criar uma requisição de um chamado de um usuário
+ * @returns {Object}
+ */
   public createRequest(request: any) {
     var params = {
       DelaySeconds: 0,
